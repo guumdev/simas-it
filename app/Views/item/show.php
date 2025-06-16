@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-body">
         <?php if (!empty($itemData['image'])) : ?>
-          <img src="<?= base_url('/images/barang/' . $itemData['image']) ?>" alt="Item Image" class="img-thumbnail">
+          <img src="<?= base_url('/uploads/images/barang/' . $itemData['image']) ?>" alt="Item Image" class="img-thumbnail">
         <?php else: ?>
           <img src="https://placehold.co/600x400" alt="placeholder" class="img-thumbnail">
         <?php endif; ?>

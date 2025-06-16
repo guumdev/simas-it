@@ -52,8 +52,8 @@
           name: 'image',
           render: function(data, type, row) {
             if (data && data !== '') {
-              // return '<a href="' + window.location.origin + '/images/barang/' + data + '" target="_blank"><img src="' + window.location.origin + '/images/barang/' + data + '" alt="Asset Image" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;"></a>';
-              return '<a href="' + window.location.origin + '/images/barang/' + data + '" target="_blank" class="btn btn-sm btn-primary"><i class="uil-image"></i> Lihat foto</a>';
+              // return '<a href="' + window.location.origin + '/uploads/images/barang/' + data + '" target="_blank"><img src="' + window.location.origin + '/images/barang/' + data + '" alt="Asset Image" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;"></a>';
+              return '<a href="' + window.location.origin + '/uploads/images/barang/' + data + '" target="_blank" class="btn btn-sm btn-primary"><i class="uil-image"></i> Lihat foto</a>';
             } else {
               return '<span class="text-muted">No Image</span>';
             }

@@ -80,7 +80,7 @@
             <label class="form-label" for="form-image">Foto Barang <small class="text-muted">(kosongkan jika tidak diubah)</small></label>
             <?php if (!empty($item['image'])) : ?>
               <div class="mb-2">
-                <img src="<?= base_url('/images/barang/' . $item['image']) ?>" alt="Current Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                <img src="<?= base_url('/uploads/images/barang/' . $item['image']) ?>" alt="Current Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                 <p class="text-muted small mt-1">Foto saat ini: <?= htmlspecialchars($item['image']) ?></p>
               </div>
             <?php endif; ?>
