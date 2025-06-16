@@ -7,7 +7,7 @@
         url: '<?= base_url('datatables/items') ?>',
         data: function(d) {
           d.managers_filter = $('#managers-filter').val();
-          d.date_filter = $('#date-filter').val();
+          d.year_filter = $('#year-filter').val();
         }
       },
       columns: [{
@@ -92,15 +92,17 @@
       },
     });
 
+    $('#btn-reset').addClass('disabled');
+
     $('#btn-reset').on('click', function() {
       $('#managers-filter').val('').trigger('change');
-      $('#date-filter').val('');
-      $('#btn-reset').addClass('btn-soft-danger');
+      $('#year-filter').val('');
+      $('#btn-reset').addClass('disabled');
       table.ajax.reload();
     });
 
-    $('#date-filter, #managers-filter').on('change', function() {
-      $('#btn-reset').removeClass('btn-soft-danger');
+    $('#year-filter, #managers-filter').on('change', function() {
+      $('#btn-reset').removeClass('disabled');
       table.ajax.reload();
     });
   });

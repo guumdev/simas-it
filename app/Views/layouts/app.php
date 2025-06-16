@@ -23,6 +23,8 @@
   <link href="<?= base_url('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css'); ?>" rel="stylesheet" type="text/css" />
   <!-- Sweet Alert-->
   <link href="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.css') ?>" rel="stylesheet" type="text/css" />
+  <!-- Datepicker -->
+  <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
   <!-- App Css-->
   <link href="<?= base_url('assets/css/app.min.css'); ?>" id="app-style" rel="stylesheet" type="text/css" />
 </head>
@@ -83,6 +85,9 @@
   <!-- Datatable - Responsive examples -->
   <script src="<?= base_url('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js'); ?>"></script>
   <script src="<?= base_url('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js'); ?>"></script>
+
+  <!-- datepicker js -->
+  <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
   <!-- Sweet Alert-->
   <script src="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.js') ?>"></script>

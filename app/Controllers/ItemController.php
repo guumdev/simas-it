@@ -49,8 +49,8 @@ class ItemController extends BaseController
                 if ($request->managers_filter) {
                     $builder->where('items.asset_managers_id', $request->managers_filter);
                 }
-                if ($request->date_filter) {
-                    $builder->where('DATE(items.acquisition_date)', $request->date_filter);
+                if ($request->year_filter) {
+                    $builder->where('YEAR(items.acquisition_date)', $request->year_filter);
                 }
             })
             ->addNumbering()

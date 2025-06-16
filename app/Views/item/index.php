@@ -71,12 +71,12 @@
               </select>
             </div>
             <div class="col-lg-3">
-              <label for="date-filter" class="form-label">Tanggal Perolehan</label>
-              <input class="form-control" type="date" id="date-filter" name="date_filter" placeholder="Filter tanggal">
+              <label for="year-filter" class="form-label">Tahun Perolehan</label>
+              <input type="text" class="form-control" id="year-filter" placeholder="Pilih tahun">
             </div>
             <div class="col-lg-6">
               <div class="d-flex gap-2">
-                <button type="button" class="btn btn-danger btn-soft-danger w-sm waves-effect waves-light" id="btn-reset">
+                <button type="button" class="btn btn-danger w-sm waves-effect waves-light" id="btn-reset">
                   <i class="uil-redo me-2"></i>Reset
                 </button>
               </div>

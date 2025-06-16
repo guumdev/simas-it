@@ -28,6 +28,13 @@
       }
     });
 
+    $('#year-filter').datepicker({
+      format: 'yyyy',
+      minViewMode: 2,
+      startView: 2,
+      autoclose: true
+    });
+
     // open view page
     $(document).on('click', '.view-btn', function(e) {
       e.preventDefault();
