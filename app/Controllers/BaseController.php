@@ -55,4 +55,24 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
     }
+
+    public function jsonResponse($status, $message, $data = [], $error = [], $toast = [],  $httpCode = 200)
+    {
+        $payload = [
+            'status' => $status,
+            'message' => $message,
+        ];
+
+        if (!empty($data) && $status === 'success') {
+            $payload['data'] = $data;
+        }
+        if (!empty($error) && $status === 'error') {
+            $payload['error'] = $error;
+        }
+        if (!empty($toast)) {
+            $payload['toast'] = $toast;
+        }
+
+        return $this->response->setStatusCode($httpCode)->setJSON($payload);
+    }
 }

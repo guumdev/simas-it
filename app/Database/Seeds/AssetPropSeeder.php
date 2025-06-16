@@ -58,7 +58,40 @@ class AssetPropSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'asset_managers_id' => 3,
+                'code' => 'ACT004',
+                'name' => 'Router',
+                'description' => 'Router Category',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
         ];
         $this->db->table('asset_categories')->insertBatch($assetCategoriesData);
+
+        $assetLocationsData = [
+            [
+                'code' => 'AL001',
+                'name' => 'Manalagi',
+                'description' => 'Lokasi aset di ruang Manalagi',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'code' => 'AL002',
+                'name' => 'Cengkir',
+                'description' => 'Lokasi aset di ruang Cengkir',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'code' => 'AL003',
+                'name' => 'Kidang Kencana',
+                'description' => 'Lokasi aset di ruang Kidang Kencana',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+        ];
+        $this->db->table('asset_locations')->insertBatch($assetLocationsData);
     }
 }

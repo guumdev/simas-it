@@ -25,11 +25,6 @@ class CreateItemsTable extends Migration
                 'constraint' => 11,
                 'unsigned' => true,
             ],
-            'code' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'unique' => true,
-            ],
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
