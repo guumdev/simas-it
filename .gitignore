@@ -126,3 +126,4 @@ _modules/*
 /phpunit*.xml
 
 /public/uploads/images/
+/public/uploads/qr_codes/

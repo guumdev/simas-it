@@ -58,6 +58,10 @@
           <div class="col-lg-12 mb-3">
             <label class="form-label" for="form-image">Foto Barang <small class="text-muted">(kosongkan jika tidak diisi)</small></label>
             <input class="form-control" type="file" id="form-image" name="image" accept="image/*">
+            <div class="form-text">
+              <i class="uil-info-circle me-1"></i>
+              Format yang didukung: .jpg, .jpeg .png (maksimal 2MB)
+            </div>
           </div>
           <div class="mt-3 d-flex gap-2 justify-content-end">
             <a href="/items" class="btn btn-secondary w-sm waves-effect waves-light">Kembali</a>
@@ -170,7 +174,6 @@
     });
 
     function submitData() {
-      let isValid = true;
       var formData = new FormData();
 
       formData.append('asset_managers_id', $('#select-managers').val());

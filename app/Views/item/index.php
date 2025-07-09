@@ -147,19 +147,39 @@
                       <tbody>
                         <tr>
                           <td class="fw-bold">A:</td>
-                          <td>Nama Produk</td>
+                          <td>Pengelola Aset</td>
                         </tr>
                         <tr>
                           <td class="fw-bold">B:</td>
-                          <td>Deskripsi</td>
+                          <td>Kategori Aset</td>
                         </tr>
                         <tr>
                           <td class="fw-bold">C:</td>
-                          <td>Harga</td>
+                          <td>Nama Barang</td>
                         </tr>
                         <tr>
                           <td class="fw-bold">D:</td>
-                          <td>Stok</td>
+                          <td>Merek</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-bold">E:</td>
+                          <td>Model</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-bold">F:</td>
+                          <td>Nomor Seri</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-bold">G:</td>
+                          <td>Vendor</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-bold">H:</td>
+                          <td>Spesifikasi</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-bold">I:</td>
+                          <td>Tanggal Perolehan</td>
                         </tr>
                       </tbody>
                     </table>

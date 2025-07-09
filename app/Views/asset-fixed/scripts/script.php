@@ -1,8 +1,7 @@
 <script>
   $(document).ready(function() {
-    // select2
-    $('#managers-filter').select2({
-      placeholder: 'Pilih Pengelola',
+    $('#locations-filter').select2({
+      placeholder: 'Pilih Lokasi Aset',
       width: '100%',
       language: {
         noResults: function() {
@@ -13,15 +12,15 @@
         }
       },
       ajax: {
-        url: '<?= base_url('select/get-asset-managers') ?>',
+        url: '<?= base_url('select/get-asset-locations') ?>',
         dataType: 'json',
         delay: 250,
         processResults: function(data) {
           return {
-            results: data.map(function(manager) {
+            results: data.map(function(location) {
               return {
-                id: manager.id,
-                text: manager.name
+                id: location.id,
+                text: location.name
               };
             })
           };
@@ -29,7 +28,6 @@
       }
     });
 
-    // datepicker
     $('#year-filter').datepicker({
       format: 'yyyy',
       minViewMode: 2,
@@ -40,13 +38,13 @@
     // open view page
     $(document).on('click', '.view-btn', function(e) {
       e.preventDefault();
-      window.location.href = `<?= base_url('items/show') ?>/${$(this).data('id')}`;
+      window.location.href = `<?= base_url('asset-fixed/show') ?>/${$(this).data('id')}`;
     });
 
     // open edit page
     $(document).on('click', '.edit-btn', function(e) {
       e.preventDefault();
-      window.location.href = `<?= base_url('items/edit') ?>/${$(this).data('id')}`;
+      window.location.href = `<?= base_url('asset-fixed/edit') ?>/${$(this).data('id')}`;
     });
 
     // delete data
@@ -55,7 +53,6 @@
       deleteData(this);
     });
 
-    // upload file
     $('#excel_file').on('change', function(e) {
       const file = e.target.files[0];
       if (file) {
@@ -89,13 +86,13 @@
   }
 
   // fn refresh item counter
-  function refreshItemCounter() {
-    $.get('items/counter', function(res) {
-      $('#all-counter').text(res.allItems);
-      $('#programmer-counter').text(res.programmerItems);
-      $('#hardware-counter').text(res.hardwareItems);
-      $('#network-counter').text(res.networkItems);
-    });
+  function refreshAssetFixedCounter() {
+    // $.get('items/counter', function(res) {
+    //   $('#all-counter').text(res.allItems);
+    //   $('#programmer-counter').text(res.programmerItems);
+    //   $('#hardware-counter').text(res.hardwareItems);
+    //   $('#network-counter').text(res.networkItems);
+    // });
   }
 
   // fn delete acategory data
@@ -104,7 +101,7 @@
 
     Swal.fire({
       title: 'Hapus',
-      text: "Anda yakin ingin menghapus barang ini?",
+      text: "Anda yakin ingin menghapus aset ini?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#34c38f',
@@ -114,13 +111,13 @@
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: `/items/delete/${id}`,
+          url: `/asset-fixed/delete/${id}`,
           method: 'DELETE',
           success: function(res) {
             if (res.status == 'success') {
               showToast(res.toast.type, res.toast.message);
-              $('#item-dtable').DataTable().ajax.reload(function() {
-                refreshItemCounter();
+              $('#asset-fixed-dtable').DataTable().ajax.reload(function() {
+                refreshAssetFixedCounter();
               });
             }
           },

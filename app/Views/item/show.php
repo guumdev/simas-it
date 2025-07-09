@@ -23,39 +23,39 @@
             <tbody>
               <tr>
                 <td style="font-weight: bold;">Pengelola Aset</td>
-                <td><?= $assetManagerData['name'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $assetManagerData['name'] ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Kategori Aset</td>
-                <td><?= $assetCategoryData['name'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $assetCategoryData['name'] ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Nama Barang</td>
-                <td><?= $itemData['name'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $itemData['name'] ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Merek</td>
-                <td><?= $itemData['brand'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $itemData['brand'] ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Model</td>
-                <td><?= $itemData['model'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $itemData['model'] ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Nomor Seri</td>
-                <td><?= $itemData['serial_number'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $itemData['serial_number'] ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Vendor</td>
-                <td><?= $itemData['vendor'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $itemData['vendor'] ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Tanggal Perolehan</td>
-                <td><?= date('d M Y', strtotime($itemData['acquisition_date'])) ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= date('d M Y', strtotime($itemData['acquisition_date'])) ?></td>
               </tr>
               <tr>
                 <td style="font-weight: bold;">Spesifikasi</td>
-                <td><?= $itemData['description'] ?></td>
+                <td><b>:</b>&nbsp;&nbsp;<?= $itemData['description'] ?></td>
               </tr>
             </tbody>
           </table>

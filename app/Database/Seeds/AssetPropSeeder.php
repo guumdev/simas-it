@@ -10,22 +10,22 @@ class AssetPropSeeder extends Seeder
     {
         $assetManagersData = [
             [
-                'code' => 'AMG001',
+                'code' => 'PRGMR',
                 'name' => 'Programmer',
                 'description' => 'Programmer Asset Manager',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'code' => 'AMG002',
-                'name' => 'Hardware Technician',
+                'code' => 'HRDWR',
+                'name' => 'Hardware',
                 'description' => 'Hardware Technician Asset Manager',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'code' => 'AMG003',
-                'name' => 'Network Technician',
+                'code' => 'NTWRK',
+                'name' => 'Network',
                 'description' => 'Network Technician Asset Manager',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -36,7 +36,7 @@ class AssetPropSeeder extends Seeder
         $assetCategoriesData = [
             [
                 'asset_managers_id' => 1,
-                'code' => 'ACT001',
+                'code' => '001',
                 'name' => 'Laptop',
                 'description' => 'Laptop Category',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -44,7 +44,7 @@ class AssetPropSeeder extends Seeder
             ],
             [
                 'asset_managers_id' => 1,
-                'code' => 'ACT002',
+                'code' => '002',
                 'name' => 'Desktop',
                 'description' => 'Desktop Category',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -52,7 +52,7 @@ class AssetPropSeeder extends Seeder
             ],
             [
                 'asset_managers_id' => 2,
-                'code' => 'ACT003',
+                'code' => '003',
                 'name' => 'Printer',
                 'description' => 'Printer Category',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -60,9 +60,17 @@ class AssetPropSeeder extends Seeder
             ],
             [
                 'asset_managers_id' => 3,
-                'code' => 'ACT004',
+                'code' => '004',
                 'name' => 'Router',
                 'description' => 'Router Category',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'asset_managers_id' => 3,
+                'code' => '005',
+                'name' => 'CCTV',
+                'description' => 'CCTV Category',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
@@ -71,21 +79,21 @@ class AssetPropSeeder extends Seeder
 
         $assetLocationsData = [
             [
-                'code' => 'AL001',
-                'name' => 'Manalagi',
-                'description' => 'Lokasi aset di ruang Manalagi',
+                'code' => 'IT',
+                'name' => 'Instalasi IT',
+                'description' => 'Lokasi aset di ruang IT',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'code' => 'AL002',
+                'code' => 'CNKR',
                 'name' => 'Cengkir',
                 'description' => 'Lokasi aset di ruang Cengkir',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'code' => 'AL003',
+                'code' => 'KKCN',
                 'name' => 'Kidang Kencana',
                 'description' => 'Lokasi aset di ruang Kidang Kencana',
                 'created_at' => date('Y-m-d H:i:s'),

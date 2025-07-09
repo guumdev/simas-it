@@ -24,9 +24,12 @@
   <!-- Sweet Alert-->
   <link href="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.css') ?>" rel="stylesheet" type="text/css" />
   <!-- Datepicker -->
-  <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+  <link href="<?= base_url('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet">
   <!-- App Css-->
   <link href="<?= base_url('assets/css/app.min.css'); ?>" id="app-style" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Css -->
+  <?= $this->renderSection('custom-css'); ?>
 </head>
 
 
@@ -87,7 +90,7 @@
   <script src="<?= base_url('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js'); ?>"></script>
 
   <!-- datepicker js -->
-  <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="<?= base_url('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js'); ?>"></script>
 
   <!-- Sweet Alert-->
   <script src="<?= base_url('assets/libs/sweetalert2/sweetalert2.min.js') ?>"></script>
@@ -137,6 +140,16 @@
         toast.remove();
       });
     }
+
+    // timeout alert
+    setTimeout(function() {
+      const alerts = document.querySelectorAll('[role="alert"]');
+      // const alerts = document.querySelectorAll('.alert');
+      alerts.forEach(function(alert) {
+        const bsAlert = new bootstrap.Alert(alert);
+        bsAlert.close();
+      });
+    }, 10000);
   </script>
 
 </body>

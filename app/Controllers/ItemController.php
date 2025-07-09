@@ -72,19 +72,9 @@ class ItemController extends BaseController
                 ['label' => 'Daftar Barang']
             ]
         ];
-        $managers = $this->assetManagerModel->findAll();
         $itemCounter = $this->itemModel->itemCounter();
 
-        return view('/item/index', ['webProperties' => $webProperties, 'managers' => $managers, 'itemCounter' => $itemCounter]);
-    }
-
-    public function getAssetManagers()
-    {
-        $managers = $this->assetManagerModel->select('id, name, code')
-            ->where('deleted_at', null)
-            ->findAll();
-
-        return $this->response->setJSON($managers);
+        return view('/item/index', ['webProperties' => $webProperties, 'itemCounter' => $itemCounter]);
     }
 
     public function create()
@@ -283,7 +273,7 @@ class ItemController extends BaseController
                 }
 
                 $oldImageName = $existingData['image'];
-                $imageName = $oldImageName; // Default tetap gambar lama
+                $imageName = $oldImageName;
                 $uploadPath = realpath(ROOTPATH . 'public/uploads/images/barang/');
 
                 if (!$uploadPath) {
@@ -397,24 +387,34 @@ class ItemController extends BaseController
 
             // Contoh data
             $sheet->setCellValue('A2', '1');
-            $sheet->setCellValue('B2', '2');
+            $sheet->setCellValue('B2', '1');
             $sheet->setCellValue('C2', 'Laptop Dell XPS 13');
             $sheet->setCellValue('D2', 'Dell');
             $sheet->setCellValue('E2', 'XPS 13');
             $sheet->setCellValue('F2', 'SN123456789');
             $sheet->setCellValue('G2', 'Dell Inc.');
             $sheet->setCellValue('H2', 'Laptop ultrabook dengan performa tinggi');
-            $sheet->setCellValue('I2', '2023-01-01');
+            $sheet->setCellValue('I2', '2024-01-01');
 
             $sheet->setCellValue('A3', '2');
             $sheet->setCellValue('B3', '3');
-            $sheet->setCellValue('C3', 'HIKVISION CCTV');
-            $sheet->setCellValue('D3', 'HIKVISION');
-            $sheet->setCellValue('E3', 'DS-2CD2347G1-LU');
-            $sheet->setCellValue('F3', 'SN987654321');
-            $sheet->setCellValue('G3', 'HIKVISION');
-            $sheet->setCellValue('H3', 'CCTV dengan resolusi tinggi');
-            $sheet->setCellValue('I3', '2023-02-01');
+            $sheet->setCellValue('C3', 'EPSON Printer L3110');
+            $sheet->setCellValue('D3', 'Epson');
+            $sheet->setCellValue('E3', 'L3110');
+            $sheet->setCellValue('F3', 'SN9876543210');
+            $sheet->setCellValue('G3', 'Epson Inc.');
+            $sheet->setCellValue('H3', 'Printer dengan resolusi tinggi');
+            $sheet->setCellValue('I3', '2025-02-01');
+
+            $sheet->setCellValue('A4', '3');
+            $sheet->setCellValue('B4', '5');
+            $sheet->setCellValue('C4', 'HIKVISION CCTV');
+            $sheet->setCellValue('D4', 'HIKVISION');
+            $sheet->setCellValue('E4', 'DS-2CD2347G1-LU');
+            $sheet->setCellValue('F4', 'SN987654321');
+            $sheet->setCellValue('G4', 'HIKVISION');
+            $sheet->setCellValue('H4', 'CCTV dengan resolusi tinggi');
+            $sheet->setCellValue('I4', '2026-03-01');
 
             // Auto resize columns
             foreach (range('A', 'I') as $column) {
@@ -566,6 +566,12 @@ class ItemController extends BaseController
     {
         try {
             $items = $this->itemModel->findAll();
+            $items = $this->db->table('items')
+                ->select('items.*, am.name as managers_name, ac.code as categories_code, ac.name as categories_name')
+                ->join('asset_managers as am', 'am.id = items.asset_managers_id', 'left')
+                ->join('asset_categories as ac', 'ac.id = items.asset_categories_id', 'left')
+                ->where('items.deleted_at', null)
+                ->get()->getResultArray();
 
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
@@ -587,13 +593,11 @@ class ItemController extends BaseController
                 ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                 ->getStartColor()->setARGB('FFCCCCCC');
 
-            $this->createHelperTable($sheet);
-
             // Data
             $row = 2;
             foreach ($items as $item) {
-                $sheet->setCellValue('A' . $row, $item['asset_managers_id']);
-                $sheet->setCellValue('B' . $row, $item['asset_categories_id']);
+                $sheet->setCellValue('A' . $row, $item['managers_name']);
+                $sheet->setCellValue('B' . $row, $item['categories_code'] . ' - ' . $item['categories_name']);
                 $sheet->setCellValue('C' . $row, $item['name']);
                 $sheet->setCellValue('D' . $row, $item['brand']);
                 $sheet->setCellValue('E' . $row, $item['model']);

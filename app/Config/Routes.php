@@ -13,8 +13,10 @@ $routes->get('datatables/items', 'ItemController::getItemDt');
 $routes->get('datatables/asset-locations', 'AssetLocationController::getAssetLocationDt');
 $routes->get('datatables/asset-managers', 'AssetManagerController::getAssetManagerDt');
 $routes->get('datatables/asset-categories', 'AssetCategoryController::getAssetCategoryDt');
+$routes->get('datatables/asset-fixed', 'AssetFixedController::getAssetFixedDt');
 
-$routes->get('select/get-asset-managers', 'ItemController::getAssetManagers');
+$routes->get('select/get-asset-managers', 'DataSelectController::getAssetManagers');
+$routes->get('select/get-asset-locations', 'DataSelectController::getAssetLocations');
 
 $routes->get('asset-locations/counter', 'AssetLocationController::getAssetLocationCounter');
 $routes->get('asset-locations', 'AssetLocationController::index');
@@ -48,3 +50,17 @@ $routes->delete('items/delete/(:num)', 'ItemController::delete/$1');
 $routes->get('items/excel/export', 'ItemController::exportExcel');
 $routes->post('items/excel/import', 'ItemController::importExcel');
 $routes->get('items/excel/template', 'ItemController::downloadTemplate');
+
+$routes->get('asset-fixed', 'AssetFixedController::index');
+$routes->get('asset-fixed/create', 'AssetFixedController::create');
+$routes->post('asset-fixed/store', 'AssetFixedController::store');
+$routes->get('asset-fixed/show/(:num)', 'AssetFixedController::show/$1');
+$routes->get('aset-berwujud/detail/(.*)', 'AssetFixedController::showByCode/$1');
+$routes->get('asset-fixed/edit/(:num)', 'AssetFixedController::edit/$1');
+$routes->put('asset-fixed/update/(:num)', 'AssetFixedController::update/$1');
+$routes->delete('asset-fixed/delete/(:num)', 'AssetFixedController::delete/$1');
+$routes->get('asset-fixed/excel/export', 'AssetFixedController::exportExcel');
+$routes->post('asset-fixed/excel/import', 'AssetFixedController::importExcel');
+$routes->get('asset-fixed/excel/template', 'AssetFixedController::downloadTemplate');
+$routes->post('asset-fixed/generate/qr', 'AssetFixedController::generateQr');
+$routes->get('aset-berwujud/print', 'AssetFixedController::printAssetFixed');

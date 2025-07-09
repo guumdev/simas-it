@@ -13,7 +13,6 @@
       columns: [{
           data: 'id',
           name: 'id',
-          orderable: false,
           searchable: false
         },
         {

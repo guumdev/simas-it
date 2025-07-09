@@ -85,6 +85,10 @@
               </div>
             <?php endif; ?>
             <input class="form-control" type="file" id="form-image" name="image" accept="image/*">
+            <div class="form-text">
+              <i class="uil-info-circle me-1"></i>
+              Format yang didukung: .jpg, .jpeg .png (maksimal 2MB)
+            </div>
           </div>
           <div class="mt-3 d-flex gap-2 justify-content-end">
             <a href="/items" class="btn btn-secondary w-sm waves-effect waves-light">Kembali</a>
