@@ -16,13 +16,7 @@ use App\Models\QrCodeModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use Endroid\QrCode\Builder\Builder;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\Label\LabelAlignment;
-use Endroid\QrCode\Label\Font\OpenSans;
-use Endroid\QrCode\RoundBlockSizeMode;
-use Endroid\QrCode\Writer\PngWriter;
+use App\Services\QrCodeService;
 
 class AssetFixedController extends BaseController
 {
@@ -34,6 +28,7 @@ class AssetFixedController extends BaseController
     protected $qrCodeModel;
     protected $itemModel;
     protected $validator;
+    protected $qrCodeService;
 
     public function __construct()
     {
@@ -45,6 +40,7 @@ class AssetFixedController extends BaseController
         $this->itemModel = new ItemModel();
         $this->qrCodeModel = new QrCodeModel();
         $this->validator = Services::validation();
+        $this->qrCodeService = new QrCodeService();
     }
 
     public function getAssetFixedDt()
@@ -177,7 +173,7 @@ class AssetFixedController extends BaseController
                             $siteUrl = base_url('aset-berwujud/detail/');
                             $qrUrl = base64_encode($assetCode);
                             $combine = $siteUrl . $qrUrl;
-                            $qrImagePath = $this->generateQRCodeImage($combine, $qrCodeId);
+                            $qrImagePath = $this->qrCodeService->generateQRCodeImage($combine, $qrCodeId);
 
                             // Update qr_codes table with image path
                             $this->qrCodeModel->update($qrCodeId, [
@@ -322,7 +318,7 @@ class AssetFixedController extends BaseController
                     $siteUrl = base_url('aset-berwujud/detail/');
                     $qrUrl = base64_encode($qrCode['content']);
                     $combine = $siteUrl . $qrUrl;
-                    $generatedImage = $this->generateQRCodeImage($combine, $qrCode['id']);
+                    $generatedImage = $this->qrCodeService->generateQRCodeImage($combine, $qrCode['id']);
 
                     $this->qrCodeModel->update($qrCode['id'], ['image' => $generatedImage]);
                 }
@@ -443,7 +439,7 @@ class AssetFixedController extends BaseController
                         $combine = $siteUrl . $qrUrl;
 
                         // generate qr process
-                        $generatedImage = $this->generateQRCodeImage($combine, $item['id']);
+                        $generatedImage = $this->qrCodeService->generateQRCodeImage($combine, $item['id']);
 
                         // cek status generate
                         if ($generatedImage) {
@@ -533,43 +529,6 @@ class AssetFixedController extends BaseController
                 'title' => 'Gagal',
                 'message' => 'Request harus AJAX',
             ], 400);
-        }
-    }
-
-    private function generateQRCodeImage($content, $qrCodeId)
-    {
-        try {
-            $uploadPath = ROOTPATH . 'public/uploads/qr_codes/';
-            if (!is_dir($uploadPath)) {
-                mkdir($uploadPath, 0755, true);
-            }
-
-            $filename = 'qr_' . $qrCodeId . '_' . time() . '.png';
-            $filePath = $uploadPath . $filename;
-
-            // Generate QR code using endroid/qr-code Builder
-            $builder = new \Endroid\QrCode\Builder\Builder(
-                writer: new \Endroid\QrCode\Writer\PngWriter(),
-                writerOptions: [],
-                validateResult: false,
-                data: $content,
-                encoding: new \Endroid\QrCode\Encoding\Encoding('UTF-8'),
-                errorCorrectionLevel: \Endroid\QrCode\ErrorCorrectionLevel::High,
-                size: 300,
-                margin: 10,
-                roundBlockSizeMode: \Endroid\QrCode\RoundBlockSizeMode::Margin,
-            );
-
-            $result = $builder->build();
-
-            file_put_contents($filePath, $result->getString());
-
-            // Return relative path for database storage
-            return $filename;
-        } catch (\Exception $e) {
-            // Log error and return null if QR generation fails
-            log_message('error', 'Failed to generate QR code: ' . $e->getMessage());
-            return null;
         }
     }
 
