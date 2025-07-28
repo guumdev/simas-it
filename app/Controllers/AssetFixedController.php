@@ -250,6 +250,26 @@ class AssetFixedController extends BaseController
         return view('asset-fixed/show_public', ['assetFixedData' => $assetFixed, 'itemData' => $item, 'assetManagerData' => $assetManager, 'assetCategoryData' => $assetCategory, 'assetLocationData' => $assetLocation, 'qrCode' => $qrCode]);
     }
 
+    public function getDtMaintenancePublic($id)
+    {
+        if (!$this->request->isAJAX()) {
+            return $this->response->setJSON(['error' => 'Only AJAX requests are allowed.']);
+        }
+
+        $builder = $this->db->table('asset_maintenance as amt')
+            ->select('amt.id, i.name as items_name, qr.content as qr_codes, amt.maintenance_location, amt.performed_by, amt.cost, amt.maintenance_date, amt.duration, amt.maintenance_type')
+            ->join('asset_fixed as af', 'amt.asset_fixed_id = af.id', 'left')
+            ->join('items as i', 'af.item_id = i.id', 'left')
+            ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
+            ->where('amt.asset_fixed_id', $id)
+            ->where('amt.deleted_at', null)
+            ->orderBy('amt.created_at', 'desc');
+
+        return DataTable::of($builder)
+            ->addNumbering()
+            ->toJson(true);
+    }
+
     public function edit($id)
     {
         $webProperties = [

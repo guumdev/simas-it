@@ -6,14 +6,17 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\AssetManagerModel;
 use App\Models\AssetLocationModel;
+use Config\Database;
 
 class DataSelectController extends BaseController
 {
+    protected $db;
     protected $assetManagerModel;
     protected $assetLocationModel;
 
     public function __construct()
     {
+        $this->db = Database::connect();
         $this->assetManagerModel = new AssetManagerModel();
         $this->assetLocationModel = new AssetLocationModel();
     }
@@ -34,5 +37,41 @@ class DataSelectController extends BaseController
             ->findAll();
 
         return $this->response->setJSON($locations);
+    }
+
+    public function getAssetFixedByCode()
+    {
+        $search = $this->request->getGet('q');
+        $page = $this->request->getGet('page') ?? 1;
+        $limit = 10;
+        $offset = ($page - 1) * $limit;
+
+        $builder = $this->db->table('asset_fixed as af')
+            ->select('af.id, item.name as items_name, qr.content as qr_codes')
+            ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
+            ->join('items as item', 'af.item_id = item.id', 'left')
+            ->where('af.deleted_at', null);
+
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('item.name', $search)
+                ->orLike('qr.content', $search)
+                ->groupEnd();
+        }
+
+        // Hitung total data untuk pagination
+        $total = $builder->countAllResults(false);
+
+        // Ambil data dengan limit dan offset
+        $assets = $builder->limit($limit, $offset)->get()->getResult();
+
+        $response = [
+            'results' => $assets,
+            'pagination' => [
+                'more' => ($offset + $limit) < $total
+            ]
+        ];
+
+        return $this->response->setJSON($response);
     }
 }

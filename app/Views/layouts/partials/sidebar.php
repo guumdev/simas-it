@@ -74,7 +74,7 @@
               <ul class="sub-menu" aria-expanded="false">
                 <li><a href="assets.html">Audit</a></li>
                 <li><a href="assets.html">Perpindahan Aset</a></li>
-                <li><a href="assets.html">Pemeliharaan Aset</a></li>
+                <li><a href="<?= base_url('/asset-maintenances') ?>">Pemeliharaan Aset</a></li>
               </ul>
             </li>
 

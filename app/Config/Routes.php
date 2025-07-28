@@ -9,14 +9,18 @@ $routes->get('/', 'Home::index');
 
 $routes->get('dashboard', 'DashboardController::index');
 
+// Datatables routes
 $routes->get('datatables/items', 'ItemController::getItemDt');
 $routes->get('datatables/asset-locations', 'AssetLocationController::getAssetLocationDt');
 $routes->get('datatables/asset-managers', 'AssetManagerController::getAssetManagerDt');
 $routes->get('datatables/asset-categories', 'AssetCategoryController::getAssetCategoryDt');
 $routes->get('datatables/asset-fixed', 'AssetFixedController::getAssetFixedDt');
+$routes->get('datatables/asset-maintenances', 'AssetMaintenanceController::getAssetMaintenanceDt');
+$routes->get('aset-berwujud/maintenance-dt/(:num)', 'AssetFixedController::getDtMaintenancePublic/$1');
 
 $routes->get('select/get-asset-managers', 'DataSelectController::getAssetManagers');
 $routes->get('select/get-asset-locations', 'DataSelectController::getAssetLocations');
+$routes->get('select/get-asset-code', 'DataSelectController::getAssetFixedByCode');
 
 $routes->get('asset-locations/counter', 'AssetLocationController::getAssetLocationCounter');
 $routes->get('asset-locations', 'AssetLocationController::index');
@@ -64,3 +68,12 @@ $routes->post('asset-fixed/excel/import', 'AssetFixedController::importExcel');
 $routes->get('asset-fixed/excel/template', 'AssetFixedController::downloadTemplate');
 $routes->post('asset-fixed/generate/qr', 'AssetFixedController::generateQr');
 $routes->get('aset-berwujud/print', 'AssetFixedController::printAssetFixed');
+
+$routes->get('asset-maintenances', 'AssetMaintenanceController::index');
+$routes->get('asset-maintenances/create', 'AssetMaintenanceController::create');
+$routes->post('asset-maintenances/store', 'AssetMaintenanceController::store');
+$routes->get('asset-maintenances/show/(:num)', 'AssetMaintenanceController::show/$1');
+$routes->get('asset-maintenances/edit/(:num)', 'AssetMaintenanceController::edit/$1');
+$routes->put('asset-maintenances/update/(:num)', 'AssetMaintenanceController::update/$1');
+$routes->delete('asset-maintenances/delete/(:num)', 'AssetMaintenanceController::delete/$1');
+$routes->get('asset-maintenances/excel/export', 'AssetMaintenanceController::exportExcel');

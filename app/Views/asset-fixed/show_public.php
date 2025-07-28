@@ -15,6 +15,11 @@
   <link href="<?= base_url('assets/css/bootstrap.min.css'); ?>" id="bootstrap-style" rel="stylesheet" type="text/css" />
   <!-- Icons Css -->
   <link href="<?= base_url('assets/css/icons.min.css'); ?>" rel="stylesheet" type="text/css" />
+  <!-- DataTables -->
+  <link href="<?= base_url('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>" rel="stylesheet" type="text/css" />
+  <link href="<?= base_url('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css'); ?>" rel="stylesheet" type="text/css" />
+  <!-- Responsive datatable examples -->
+  <link href="<?= base_url('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css'); ?>" rel="stylesheet" type="text/css" />
   <!-- App Css-->
   <link href="<?= base_url('assets/css/app.min.css'); ?>" id="app-style" rel="stylesheet" type="text/css" />
 
@@ -128,6 +133,21 @@
             </table>
           </div>
           <h3 class="mt-3 mb-3"><b>Riwayat Perbaikan</b></h3>
+          <table id="maintenances-dtable" class="table table-striped table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+            <thead>
+              <tr>
+                <th>Kode Aset</th>
+                <th>Nama</th>
+                <th>Jenis Perbaikan</th>
+                <th>Lokasi Perbaikan</th>
+                <th>Biaya</th>
+                <th>Durasi Perbaikan</th>
+                <th>Tanggal Perbaikan</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -141,6 +161,27 @@
   <script src="<?= base_url('assets/libs/node-waves/waves.min.js'); ?>"></script>
   <script src="<?= base_url('assets/libs/waypoints/lib/jquery.waypoints.min.js'); ?>"></script>
   <script src="<?= base_url('assets/libs/jquery.counterup/jquery.counterup.min.js'); ?>"></script>
+
+  <!-- Datatable - Init -->
+  <script src="<?= base_url('assets/js/pages/datatables.init.js'); ?>"></script>
+  <!-- Datatable - Required datatable js -->
+  <script src="<?= base_url('assets/libs/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+  <!-- Datatable - Buttons examples -->
+  <script src="<?= base_url('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/jszip/jszip.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/pdfmake/build/pdfmake.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/pdfmake/build/vfs_fonts.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/datatables.net-buttons/js/buttons.html5.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/datatables.net-buttons/js/buttons.print.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/datatables.net-buttons/js/buttons.colVis.min.js'); ?>"></script>
+  <!-- Datatable - Responsive examples -->
+  <script src="<?= base_url('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js'); ?>"></script>
+  <script src="<?= base_url('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js'); ?>"></script>
+
+  <!-- moment js -->
+  <script src="<?= base_url('assets/libs/moment/min/moment.min.js'); ?>"></script>
 
   <!-- owl.carousel js -->
   <script src="<?= base_url('assets/libs/owl.carousel/owl.carousel.min.js'); ?>"></script>
@@ -158,13 +199,81 @@
       const usageYears = currentYear - year;
       const remainingYears = economicLife - usageYears;
 
-      console.log('Usage Years:', usageYears);
-      console.log('Remaining Years:', remainingYears);
-      console.log('Expired:', remainingYears <= 0);
+      // console.log('Usage Years:', usageYears);
+      // console.log('Remaining Years:', remainingYears);
+      // console.log('Expired:', remainingYears <= 0);
 
       showUsage = `<b>:</b>&nbsp;&nbsp;${usageYears} Tahun`;
 
       $('#usage-years').html(showUsage);
+
+      var table = $('#maintenances-dtable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+          url: "/aset-berwujud/maintenance-dt/<?= $assetFixedData['id'] ?>",
+          type: "GET",
+        },
+        columns: [{
+            data: 'qr_codes',
+            name: 'qr_codes'
+          },
+          {
+            data: 'items_name',
+            name: 'items_name'
+          },
+          {
+            data: 'maintenance_type',
+            name: 'maintenance_type',
+            render: function(data) {
+              return data.charAt(0).toUpperCase() + data.slice(1)
+            }
+          },
+          {
+            data: 'maintenance_location',
+            name: 'maintenance_location',
+            render: function(data) {
+              return data.charAt(0).toUpperCase() + data.slice(1)
+            }
+          },
+          {
+            data: 'cost',
+            name: 'cost',
+            render: function(data) {
+              let result = data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+              if (data % 1 === 0) {
+                result = result.replace(/\.00$/, '');
+              }
+              return 'Rp' + result
+            }
+          },
+          {
+            data: 'duration',
+            name: 'duration',
+            render: function(data) {
+              return data + ' Hari';
+            }
+          },
+          {
+            data: 'maintenance_date',
+            name: 'maintenance_date',
+            render: function(data) {
+              return moment(data).format('DD/MM/YYYY');
+            }
+          },
+        ],
+        "language": {
+          "lengthMenu": "Tampilkan _MENU_ per halaman",
+          "zeroRecords": "Data tidak ditemukan",
+          "search": "Cari:",
+          "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+          "infoEmpty": "Tidak ada data yang ditampilkan",
+          "infoFiltered": "(difilter dari _MAX_ data)",
+          "emptyTable": "Tabel kosong",
+          "processing": "Sedang memproses...",
+          "loadingRecords": "Sedang memuat data..."
+        },
+      });
     });
   </script>
 

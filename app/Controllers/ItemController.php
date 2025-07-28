@@ -565,7 +565,6 @@ class ItemController extends BaseController
     public function exportExcel()
     {
         try {
-            $items = $this->itemModel->findAll();
             $items = $this->db->table('items')
                 ->select('items.*, am.name as managers_name, ac.code as categories_code, ac.name as categories_name')
                 ->join('asset_managers as am', 'am.id = items.asset_managers_id', 'left')
