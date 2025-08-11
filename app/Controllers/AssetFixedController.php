@@ -50,7 +50,7 @@ class AssetFixedController extends BaseController
         }
 
         $builder = $this->db->table('asset_fixed as af')
-            ->select('af.id, af.unit, af.condition, af.qr_code_id, af.responsible_person, af.economic_life, af.acquisition_cost, am.name as managers_name, al.name as locations_name, i.name as items_name, i.acquisition_date as item_acquisition_date, qr.content as qr_codes, qr.image as qr_image')
+            ->select('af.id, af.unit, af.condition, af.qr_code_id, af.responsible_person, af.economic_life, af.acquisition_cost, am.name as managers_name, al.name as locations_name, i.name as items_name, i.acquisition_date as item_acquisition_date, qr.content as qr_content, qr.image as qr_image')
             ->join('items as i', 'af.item_id = i.id', 'left')
             ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
             ->join('asset_managers as am', 'af.asset_manager_id = am.id', 'left')
@@ -219,12 +219,12 @@ class AssetFixedController extends BaseController
     public function show($id)
     {
         $webProperties = [
-            'titleHeader' => 'Detil Aset Berwujud',
-            'titlePage' => 'Detil Aset Berwujud',
+            'titleHeader' => 'Detail Aset Berwujud',
+            'titlePage' => 'Detail Aset Berwujud',
             'breadcrumbs' => [
                 ['label' => 'Dashboard', 'url' => base_url('/')],
                 ['label' => 'Daftar Aset Berwujud', 'url' => base_url('/asset-fixed')],
-                ['label' => 'Detil']
+                ['label' => 'Detail']
             ]
         ];
         $assetFixedData = $this->assetFixedModel->find($id);
@@ -273,12 +273,12 @@ class AssetFixedController extends BaseController
     public function edit($id)
     {
         $webProperties = [
-            'titleHeader' => 'Edit Aset Berwujud',
-            'titlePage' => 'Edit Aset Berwujud',
+            'titleHeader' => 'Ubah Aset Berwujud',
+            'titlePage' => 'Ubah Aset Berwujud',
             'breadcrumbs' => [
                 ['label' => 'Dashboard', 'url' => base_url('/')],
                 ['label' => 'Aset Berwujud', 'url' => base_url('/asset-fixed')],
-                ['label' => 'Edit']
+                ['label' => 'Ubah']
             ]
         ];
         $assetFixedData = $this->assetFixedModel->find($id);

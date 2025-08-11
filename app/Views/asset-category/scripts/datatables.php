@@ -14,17 +14,15 @@
         },
         {
           data: 'code',
-          name: 'code',
         },
         {
           data: null,
-          name: 'managers_code',
+          name: 'asset_managers_id',
           render: function(data, type, row) {
             return (row.managers_code || '-') + ' - ' + (row.managers_name || '-');
           }
         }, {
           data: 'name',
-          name: 'name',
         },
         {
           data: null,

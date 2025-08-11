@@ -22,29 +22,25 @@
         orderable: true,
         searchable: false,
       }, {
-        data: 'qr_codes',
+        data: 'qr_content',
         searchable: true,
         render: function(data, type, row) {
           return data ? data : '<span class="text-muted">-</span>';
         }
       }, {
         data: 'items_name',
-        name: 'items_name',
         orderable: true,
         searchable: true,
       }, {
         data: 'locations_name',
-        name: 'locations_name',
         orderable: true,
         searchable: true,
       }, {
         data: 'condition',
-        name: 'condition',
         orderable: true,
         searchable: true,
       }, {
         data: 'item_acquisition_date',
-        name: 'item_acquisition_date',
         orderable: true,
         searchable: true,
         render: function(data) {
@@ -52,7 +48,6 @@
         }
       }, {
         data: 'qr_image',
-        name: 'qr_image',
         searchable: false,
         orderable: false,
         render: function(data, type, row) {

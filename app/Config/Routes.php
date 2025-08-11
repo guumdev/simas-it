@@ -16,6 +16,9 @@ $routes->get('datatables/asset-managers', 'AssetManagerController::getAssetManag
 $routes->get('datatables/asset-categories', 'AssetCategoryController::getAssetCategoryDt');
 $routes->get('datatables/asset-fixed', 'AssetFixedController::getAssetFixedDt');
 $routes->get('datatables/asset-maintenances', 'AssetMaintenanceController::getAssetMaintenanceDt');
+$routes->get('datatables/asset-movements', 'AssetMovementController::getAssetMovementDt');
+
+// Public datatables routes
 $routes->get('aset-berwujud/maintenance-dt/(:num)', 'AssetFixedController::getDtMaintenancePublic/$1');
 
 $routes->get('select/get-asset-managers', 'DataSelectController::getAssetManagers');
@@ -77,3 +80,12 @@ $routes->get('asset-maintenances/edit/(:num)', 'AssetMaintenanceController::edit
 $routes->put('asset-maintenances/update/(:num)', 'AssetMaintenanceController::update/$1');
 $routes->delete('asset-maintenances/delete/(:num)', 'AssetMaintenanceController::delete/$1');
 $routes->get('asset-maintenances/excel/export', 'AssetMaintenanceController::exportExcel');
+
+$routes->get('asset-movements', 'AssetMovementController::index');
+$routes->get('asset-movements/create', 'AssetMovementController::create');
+$routes->post('asset-movements/store', 'AssetMovementController::store');
+$routes->get('asset-movements/show/(:num)', 'AssetMovementController::show/$1');
+$routes->get('asset-movements/edit/(:num)', 'AssetMovementController::edit/$1');
+$routes->put('asset-movements/update/(:num)', 'AssetMovementController::update/$1');
+$routes->delete('asset-movements/delete/(:num)', 'AssetMovementController::delete/$1');
+$routes->get('asset-movements/excel/export', 'AssetMovementController::exportExcel');

@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <?= $this->include('layouts/partials/breadcrumb') ?>
 
-<form class="needs-validation" id="create-maintenance-form" novalidate>
+<form class="needs-validation" id="edit-maintenance-form" novalidate>
   <?= csrf_field(); ?>
   <input type="hidden" name="id" value="<?= $maintenance['id'] ?>">
   <div class="row">
@@ -167,7 +167,7 @@
     initEditor('#maintenance-editor', 'maintenance');
     initEditor('#notes-editor', 'notes');
 
-    $('#create-maintenance-form').on('submit', function(e) {
+    $('#edit-maintenance-form').on('submit', function(e) {
       e.preventDefault();
       submitData();
     });

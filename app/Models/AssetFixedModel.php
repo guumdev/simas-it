@@ -95,7 +95,7 @@ class AssetFixedModel extends Model
 
         // Generate sequential number (5 digits)
         // Count existing assets with same prefix
-        $prefix = "AST/{$manager['code']}/{$location['code']}/{$category['code']}/{$acquisitionDate}/";
+        $prefix = "AST/{$manager['code']}/{$category['code']}/{$acquisitionDate}/";
 
         $existingCount = $this->db->table('qr_codes')
             ->where('content LIKE', $prefix . '%')

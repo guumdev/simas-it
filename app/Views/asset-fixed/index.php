@@ -205,7 +205,7 @@
 
 <?= $this->section('custom-js') ?>
 <?= $this->include('asset-fixed/scripts/script') ?>
-<?= $this->include('asset-fixed/scripts/datatable') ?>
+<?= $this->include('asset-fixed/scripts/datatables') ?>
 
 <script>
   // select/checkbox handle

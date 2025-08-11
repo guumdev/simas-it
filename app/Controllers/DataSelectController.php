@@ -47,9 +47,10 @@ class DataSelectController extends BaseController
         $offset = ($page - 1) * $limit;
 
         $builder = $this->db->table('asset_fixed as af')
-            ->select('af.id, item.name as items_name, qr.content as qr_codes')
+            ->select('af.id, af.asset_location_id as items_location_id, item.name as items_name, qr.content as qr_codes, al.name as items_location')
             ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
             ->join('items as item', 'af.item_id = item.id', 'left')
+            ->join('asset_locations as al', 'af.asset_location_id = al.id', 'left')
             ->where('af.deleted_at', null);
 
         if (!empty($search)) {

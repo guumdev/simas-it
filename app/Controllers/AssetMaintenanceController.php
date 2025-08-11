@@ -42,7 +42,7 @@ class AssetMaintenanceController extends BaseController
         }
 
         $builder = $this->db->table('asset_maintenance as amt')
-            ->select('amt.id, i.name as items_name, qr.content as qr_codes, amt.maintenance_location, amt.performed_by, amt.cost, amt.maintenance_date')
+            ->select('amt.id, i.name as items_name, qr.content as qr_content, amt.maintenance_location, amt.performed_by, amt.cost, amt.maintenance_date')
             ->join('asset_fixed as af', 'amt.asset_fixed_id = af.id', 'left')
             ->join('items as i', 'af.item_id = i.id', 'left')
             ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
@@ -139,12 +139,12 @@ class AssetMaintenanceController extends BaseController
     public function show($id)
     {
         $webProperties = [
-            'titleHeader' => 'Detil Pemeliharaan Aset',
-            'titlePage' => 'Detil Pemeliharaan Aset',
+            'titleHeader' => 'Detail Pemeliharaan Aset',
+            'titlePage' => 'Detail Pemeliharaan Aset',
             'breadcrumbs' => [
                 ['label' => 'Dashboard', 'url' => base_url('/')],
                 ['label' => 'Daftar Pemeliharaan Aset', 'url' => base_url('/asset-maintenances')],
-                ['label' => 'Detil']
+                ['label' => 'Detail']
             ]
         ];
         $maintenance = $this->assetMaintenanceModel->find($id);

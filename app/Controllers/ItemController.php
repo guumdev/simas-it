@@ -181,12 +181,12 @@ class ItemController extends BaseController
     public function show($id)
     {
         $webProperties = [
-            'titleHeader' => 'Detil Barang',
-            'titlePage' => 'Detil Barang',
+            'titleHeader' => 'Detail Barang',
+            'titlePage' => 'Detail Barang',
             'breadcrumbs' => [
                 ['label' => 'Dashboard', 'url' => base_url('/')],
                 ['label' => 'Daftar Barang', 'url' => base_url('/items')],
-                ['label' => 'Detil']
+                ['label' => 'Detail']
             ]
         ];
         $itemData = $this->itemModel->find($id);
