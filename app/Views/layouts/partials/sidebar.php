@@ -62,7 +62,7 @@
               <ul class="sub-menu" aria-expanded="false">
                 <li><a href="<?= base_url('/asset-fixed'); ?>">Berwujud</a></li>
                 <li><a href="assets.html">Habis Pakai</a></li>
-                <li><a href="assets.html">Penghapusan Aset</a></li>
+                <li><a href="<?= base_url('/asset-disposals') ?>">Penghapusan Aset</a></li>
               </ul>
             </li>
 

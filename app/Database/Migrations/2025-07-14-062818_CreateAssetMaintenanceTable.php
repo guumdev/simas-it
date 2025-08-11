@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAssetMaintenanceTable extends Migration
+class CreateAssetMaintenancesTable extends Migration
 {
     public function up()
     {
@@ -89,12 +89,12 @@ class CreateAssetMaintenanceTable extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('asset_fixed_id', 'asset_fixed', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('asset_maintenance', true);
+        $this->forge->addForeignKey('asset_fixed_id', 'asset_fixeds', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('asset_maintenances', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('asset_maintenance', true);
+        $this->forge->dropTable('asset_maintenances', true);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAssetFixedTable extends Migration
+class CreateAssetFixedsTable extends Migration
 {
     public function up()
     {
@@ -79,11 +79,11 @@ class CreateAssetFixedTable extends Migration
         $this->forge->addForeignKey('asset_location_id', 'asset_locations', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('item_id', 'items', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('qr_code_id', 'qr_codes', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('asset_fixed');
+        $this->forge->createTable('asset_fixeds');
     }
 
     public function down()
     {
-        $this->forge->dropTable('asset_fixed', true);
+        $this->forge->dropTable('asset_fixeds', true);
     }
 }

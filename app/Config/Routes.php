@@ -20,6 +20,8 @@ $routes->get('datatables/asset-movements', 'AssetMovementController::getAssetMov
 
 // Public datatables routes
 $routes->get('aset-berwujud/maintenance-dt/(:num)', 'AssetFixedController::getDtMaintenancePublic/$1');
+$routes->get('aset-berwujud/detail/(.*)', 'AssetFixedController::showByCode/$1');
+$routes->get('aset-berwujud/print', 'AssetFixedController::printAssetFixed');
 
 $routes->get('select/get-asset-managers', 'DataSelectController::getAssetManagers');
 $routes->get('select/get-asset-locations', 'DataSelectController::getAssetLocations');
@@ -62,7 +64,6 @@ $routes->get('asset-fixed', 'AssetFixedController::index');
 $routes->get('asset-fixed/create', 'AssetFixedController::create');
 $routes->post('asset-fixed/store', 'AssetFixedController::store');
 $routes->get('asset-fixed/show/(:num)', 'AssetFixedController::show/$1');
-$routes->get('aset-berwujud/detail/(.*)', 'AssetFixedController::showByCode/$1');
 $routes->get('asset-fixed/edit/(:num)', 'AssetFixedController::edit/$1');
 $routes->put('asset-fixed/update/(:num)', 'AssetFixedController::update/$1');
 $routes->delete('asset-fixed/delete/(:num)', 'AssetFixedController::delete/$1');
@@ -70,7 +71,6 @@ $routes->get('asset-fixed/excel/export', 'AssetFixedController::exportExcel');
 $routes->post('asset-fixed/excel/import', 'AssetFixedController::importExcel');
 $routes->get('asset-fixed/excel/template', 'AssetFixedController::downloadTemplate');
 $routes->post('asset-fixed/generate/qr', 'AssetFixedController::generateQr');
-$routes->get('aset-berwujud/print', 'AssetFixedController::printAssetFixed');
 
 $routes->get('asset-maintenances', 'AssetMaintenanceController::index');
 $routes->get('asset-maintenances/create', 'AssetMaintenanceController::create');
@@ -89,3 +89,8 @@ $routes->get('asset-movements/edit/(:num)', 'AssetMovementController::edit/$1');
 $routes->put('asset-movements/update/(:num)', 'AssetMovementController::update/$1');
 $routes->delete('asset-movements/delete/(:num)', 'AssetMovementController::delete/$1');
 $routes->get('asset-movements/excel/export', 'AssetMovementController::exportExcel');
+
+$routes->get('asset-disposals', 'AssetDisposalController::index');
+$routes->get('asset-disposals/create', 'AssetDisposalController::create');
+$routes->post('asset-disposals/store', 'AssetDisposalController::store');
+$routes->get('asset-disposals/show(:num)', 'AssetDisposalController::show/$1');

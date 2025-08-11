@@ -38,9 +38,9 @@ class AssetMovementController extends BaseController
             return $this->response->setJSON(['error' => 'Only AJAX requests are allowed.']);
         }
 
-        $builder = $this->db->table('asset_movement as amv')
+        $builder = $this->db->table('asset_movements as amv')
             ->select('amv.id, amv.moved_by, amv.movement_type, amv.movement_date, i.name as items_name, qr.content as qr_codes, al.name as from_location_id, al2.name as to_location_id')
-            ->join('asset_fixed as af', 'amv.asset_fixed_id = af.id', 'left')
+            ->join('asset_fixeds as af', 'amv.asset_fixed_id = af.id', 'left')
             ->join('items as i', 'af.item_id = i.id', 'left')
             ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
             ->join('asset_locations as al', 'amv.from_location_id = al.id', 'left')
@@ -148,9 +148,9 @@ class AssetMovementController extends BaseController
             ],
         ];
 
-        $datas = $this->db->table('asset_movement amv')
+        $datas = $this->db->table('asset_movements amv')
             ->select('i.name as item_name, qr.content as item_code, al.name as from_location_name, al2.name as to_location_name, amv.moved_by, amv.movement_type, amv.movement_date, amv.condition_before, amv.condition_after, amv.notes, i.image as item_image, qr.image as item_qr_image')
-            ->join('asset_fixed af', 'af.id = amv.asset_fixed_id', 'left')
+            ->join('asset_fixeds af', 'af.id = amv.asset_fixed_id', 'left')
             ->join('items i', 'i.id = af.item_id', 'left')
             ->join('qr_codes qr', 'qr.id = af.qr_code_id', 'left')
             ->join('asset_locations al', 'al.id = amv.from_location_id', 'left')
@@ -174,9 +174,9 @@ class AssetMovementController extends BaseController
                 ['label' => 'Ubah']
             ],
         ];
-        $datas = $this->db->table('asset_movement amv')
+        $datas = $this->db->table('asset_movements amv')
             ->select('i.name as item_name, qr.content as item_code, al.name as from_location_name, al2.name as to_location_name, amv.*')
-            ->join('asset_fixed af', 'af.id = amv.asset_fixed_id', 'left')
+            ->join('asset_fixeds af', 'af.id = amv.asset_fixed_id', 'left')
             ->join('items i', 'i.id = af.item_id', 'left')
             ->join('qr_codes qr', 'qr.id = af.qr_code_id', 'left')
             ->join('asset_locations al', 'al.id = amv.from_location_id', 'left')
@@ -257,9 +257,9 @@ class AssetMovementController extends BaseController
     {
         try {
             //code...
-            $datas = $this->db->table('asset_movement as amv')
+            $datas = $this->db->table('asset_movements as amv')
                 ->select('amv.*, qr.content as qr_content, itm.name as item_name, al.name as from_location_name, al2.name as to_location_name')
-                ->join('asset_fixed as af', 'amv.asset_fixed_id = af.id', 'left')
+                ->join('asset_fixeds as af', 'amv.asset_fixed_id = af.id', 'left')
                 ->join('asset_locations as al', 'amv.from_location_id = al.id', 'left')
                 ->join('asset_locations as al2', 'amv.to_location_id = al2.id', 'left')
                 ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')

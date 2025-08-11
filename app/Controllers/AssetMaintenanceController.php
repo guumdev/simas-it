@@ -41,9 +41,9 @@ class AssetMaintenanceController extends BaseController
             return $this->response->setJSON(['error' => 'Only AJAX requests are allowed.']);
         }
 
-        $builder = $this->db->table('asset_maintenance as amt')
+        $builder = $this->db->table('asset_maintenances as amt')
             ->select('amt.id, i.name as items_name, qr.content as qr_content, amt.maintenance_location, amt.performed_by, amt.cost, amt.maintenance_date')
-            ->join('asset_fixed as af', 'amt.asset_fixed_id = af.id', 'left')
+            ->join('asset_fixeds as af', 'amt.asset_fixed_id = af.id', 'left')
             ->join('items as i', 'af.item_id = i.id', 'left')
             ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
             ->where('amt.deleted_at', null)
@@ -256,9 +256,9 @@ class AssetMaintenanceController extends BaseController
     {
         try {
             //code...
-            $datas = $this->db->table('asset_maintenance as amt')
+            $datas = $this->db->table('asset_maintenances as amt')
                 ->select('amt.*, qr.content as qr_content, itm.name as item_name')
-                ->join('asset_fixed as af', 'amt.asset_fixed_id = af.id', 'left')
+                ->join('asset_fixeds as af', 'amt.asset_fixed_id = af.id', 'left')
                 ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
                 ->join('items as itm', 'af.item_id = itm.id', 'left')
                 ->where('amt.deleted_at', null)

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class AssetMaintenanceModel extends Model
 {
-    protected $table            = 'asset_maintenance';
+    protected $table            = 'asset_maintenances';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -29,7 +29,7 @@ class AssetMaintenanceModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'asset_fixed_id'        => 'required|is_not_unique[asset_fixed.id]',
+        'asset_fixed_id'        => 'required|is_not_unique[asset_fixeds.id]',
         'maintenance_type'      => 'required|in_list[pencegahan,perbaikan,darurat,rutin]',
         'maintenance_date'      => 'required|valid_date[Y-m-d]',
         'description'           => 'permit_empty|string',

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class AssetFixedModel extends Model
 {
-    protected $table            = 'asset_fixed';
+    protected $table            = 'asset_fixeds';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

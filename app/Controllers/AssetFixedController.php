@@ -49,7 +49,7 @@ class AssetFixedController extends BaseController
             return $this->response->setJSON(['error' => 'Only AJAX requests are allowed.']);
         }
 
-        $builder = $this->db->table('asset_fixed as af')
+        $builder = $this->db->table('asset_fixeds as af')
             ->select('af.id, af.unit, af.condition, af.qr_code_id, af.responsible_person, af.economic_life, af.acquisition_cost, am.name as managers_name, al.name as locations_name, i.name as items_name, i.acquisition_date as item_acquisition_date, qr.content as qr_content, qr.image as qr_image')
             ->join('items as i', 'af.item_id = i.id', 'left')
             ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
@@ -256,9 +256,9 @@ class AssetFixedController extends BaseController
             return $this->response->setJSON(['error' => 'Only AJAX requests are allowed.']);
         }
 
-        $builder = $this->db->table('asset_maintenance as amt')
+        $builder = $this->db->table('asset_maintenances as amt')
             ->select('amt.id, i.name as items_name, qr.content as qr_codes, amt.maintenance_location, amt.performed_by, amt.cost, amt.maintenance_date, amt.duration, amt.maintenance_type')
-            ->join('asset_fixed as af', 'amt.asset_fixed_id = af.id', 'left')
+            ->join('asset_fixeds as af', 'amt.asset_fixed_id = af.id', 'left')
             ->join('items as i', 'af.item_id = i.id', 'left')
             ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')
             ->where('amt.asset_fixed_id', $id)
@@ -562,8 +562,8 @@ class AssetFixedController extends BaseController
         $assetFixedModel = new AssetFixedModel();
         $qrCodes = $assetFixedModel
             ->select('qr_codes.content, qr_codes.image')
-            ->join('qr_codes', 'qr_codes.id = asset_fixed.qr_code_id')
-            ->whereIn('asset_fixed.id', $ids)
+            ->join('qr_codes', 'qr_codes.id = asset_fixeds.qr_code_id')
+            ->whereIn('asset_fixeds.id', $ids)
             ->findAll();
 
         return view('asset-fixed/print', ['qrCodes' => $qrCodes]);
@@ -817,7 +817,7 @@ class AssetFixedController extends BaseController
     public function exportExcel()
     {
         try {
-            $assetFixed = $this->db->table('asset_fixed as af')
+            $assetFixed = $this->db->table('asset_fixeds as af')
                 ->select('af.unit, af.condition, af.responsible_person, af.economic_life, af.acquisition_cost, ac.name as categories_name, am.name as managers_name, al.name as locations_name, i.name as items_name, i.brand as items_brand, i.model as items_model, i.serial_number as items_serial_number, i.vendor as items_vendor, i.acquisition_date as item_acquisition_date, i.description as items_description, qr.content as qr_codes, qr.image as qr_image')
                 ->join('items as i', 'af.item_id = i.id', 'left')
                 ->join('qr_codes as qr', 'af.qr_code_id = qr.id', 'left')

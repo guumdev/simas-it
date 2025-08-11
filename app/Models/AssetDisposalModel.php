@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AssetMovementModel extends Model
+class AssetDisposalModel extends Model
 {
-    protected $table            = 'asset_movements';
+    protected $table            = 'asset_disposals';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['asset_fixed_id', 'from_location_id', 'to_location_id', 'moved_by', 'movement_type', 'movement_date', 'condition_before', 'condition_after', 'notes'];
+    protected $allowedFields    = ['asset_fixed_id', 'disposal_type', 'disposal_reason', 'disposed_by', 'disposal_date', 'attachment', 'condition_at_disposal'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
